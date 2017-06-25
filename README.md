@@ -4,4 +4,4 @@ This is the first iteration of the TipCalculator app in Swift. I will be making 
 
 ## Demo gif 
 
-![demo gif][demo.gif]
+![demo gif][./demo.gif]
