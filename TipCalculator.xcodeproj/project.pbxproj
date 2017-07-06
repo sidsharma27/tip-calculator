@@ -305,6 +305,7 @@
 				1FD672161EFD8DEA000E80EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
