@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var defaultTip: UISegmentedControl!
-    let defaults = UserDefaults.standard
+    var defaults = UserDefaults.standard
 
     @IBAction func changeDefaultTip(_ sender: Any) {
         switch defaultTip.selectedSegmentIndex {
@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         
-        let defaults = UserDefaults.standard
+        defaults = UserDefaults.standard
         let tipIndex = defaults.integer(forKey: "tipIndex")
         switch tipIndex {
         case 0:

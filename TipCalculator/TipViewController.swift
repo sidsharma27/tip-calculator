@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TipViewController: UIViewController   {
     
@@ -15,21 +16,54 @@ class TipViewController: UIViewController   {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
+    var lastRun = UserDefaults.standard
+    
+    var lastRunInfo = [LastRun]()
+    
     @IBAction func tip(_ sender: Any) {
         logic()
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        lastRun = UserDefaults.standard
+        let total = lastRun.string(forKey: totalAmount.text!)
+        
+        
+        
         let tapRecognizer = UITapGestureRecognizer() //For user's tap interaction
         tapRecognizer.addTarget(self, action: #selector(TipViewController.tappedOutside)) //Adds a target (ViewController) and an action (tappedOutside) to a gesture-recognizer object.
         self.view.addGestureRecognizer(tapRecognizer) //add the Gesture recognizer to the UIView
+        
+        let fetchRequest: NSFetchRequest<LastRun> = LastRun.fetchRequest()
+        
+        do {
+            let settings =  try PersistanceService.context.fetch(fetchRequest)
+            self.lastRunInfo = settings
+            if !lastRunInfo.isEmpty {
+                totalAmount.text = lastRunInfo[0].billAmount!
+            }
+
+        } catch { print("Error")}
+    
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         setSegmentIndex()
         logic()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let lastRun = LastRun(context: PersistanceService.context)
+        lastRun.billAmount = totalAmount.text
+        PersistanceService.saveContext()
+        self.lastRunInfo[0] = lastRun
+        print(lastRun)
+        print(self.lastRunInfo[0])
     }
     
     func logic() {

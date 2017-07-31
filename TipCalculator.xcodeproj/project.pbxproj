@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F97C3041F2DA491006E5933 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3031F2DA491006E5933 /* PersistanceService.swift */; };
+		1F97C3071F2DA539006E5933 /* TipCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3051F2DA539006E5933 /* TipCalculator.xcdatamodeld */; };
+		1F97C30A1F2DA59F006E5933 /* LastRun+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */; };
+		1F97C30B1F2DA59F006E5933 /* LastRun+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */; };
 		1FD672061EFD8DEA000E80EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD672051EFD8DEA000E80EF /* AppDelegate.swift */; };
 		1FD672081EFD8DEA000E80EF /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD672071EFD8DEA000E80EF /* TipViewController.swift */; };
 		1FD6720B1EFD8DEA000E80EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD672091EFD8DEA000E80EF /* Main.storyboard */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F97C3031F2DA491006E5933 /* PersistanceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		1F97C3061F2DA539006E5933 /* TipCalculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TipCalculator.xcdatamodel; sourceTree = "<group>"; };
+		1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastRun+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastRun+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FD672021EFD8DEA000E80EF /* TipCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD672051EFD8DEA000E80EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD672071EFD8DEA000E80EF /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
@@ -56,13 +64,17 @@
 		1FD672041EFD8DEA000E80EF /* TipCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */,
+				1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */,
 				1FD672051EFD8DEA000E80EF /* AppDelegate.swift */,
 				1FD672071EFD8DEA000E80EF /* TipViewController.swift */,
+				1F97C3051F2DA539006E5933 /* TipCalculator.xcdatamodeld */,
 				1FD672091EFD8DEA000E80EF /* Main.storyboard */,
 				1FD672171EFF5A6C000E80EF /* SettingsViewController.swift */,
 				1FD6720C1EFD8DEA000E80EF /* Assets.xcassets */,
 				1FD6720E1EFD8DEA000E80EF /* LaunchScreen.storyboard */,
 				1FD672111EFD8DEA000E80EF /* Info.plist */,
+				1F97C3031F2DA491006E5933 /* PersistanceService.swift */,
 			);
 			path = TipCalculator;
 			sourceTree = "<group>";
@@ -140,8 +152,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FD672081EFD8DEA000E80EF /* TipViewController.swift in Sources */,
+				1F97C3041F2DA491006E5933 /* PersistanceService.swift in Sources */,
 				1FD672061EFD8DEA000E80EF /* AppDelegate.swift in Sources */,
+				1F97C3071F2DA539006E5933 /* TipCalculator.xcdatamodeld in Sources */,
 				1FD672181EFF5A6C000E80EF /* SettingsViewController.swift in Sources */,
+				1F97C30A1F2DA59F006E5933 /* LastRun+CoreDataClass.swift in Sources */,
+				1F97C30B1F2DA59F006E5933 /* LastRun+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +324,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F97C3051F2DA539006E5933 /* TipCalculator.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F97C3061F2DA539006E5933 /* TipCalculator.xcdatamodel */,
+			);
+			currentVersion = 1F97C3061F2DA539006E5933 /* TipCalculator.xcdatamodel */;
+			path = TipCalculator.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1FD671FA1EFD8DEA000E80EF /* Project object */;
 }
