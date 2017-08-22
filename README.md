@@ -2,6 +2,6 @@
 
 This is the third iteration of the TipCalculator app in Swift. I will be making more updates when I have some down time.
 
-## Demo gif 
+## Updated Demo gif 
 
 ![demo gif](demo.gif)
