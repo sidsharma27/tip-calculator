@@ -1,4 +1,3 @@
-//
 //  ViewController.swift
 //  TipCalculator
 //
@@ -7,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 class TipViewController: UIViewController   {
     
@@ -16,89 +14,106 @@ class TipViewController: UIViewController   {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
-    var lastRun = UserDefaults.standard
+    @IBOutlet weak var onePerson: UILabel!
+    @IBOutlet weak var twoPeople: UILabel!
+    @IBOutlet weak var threePeople: UILabel!
     
-    var lastRunInfo = [LastRun]()
     
     @IBAction func tip(_ sender: Any) {
         logic()
     }
-
+    @IBOutlet weak var bottomView: UIView!
+    
+    var originalBottomViewRec : CGRect = CGRect.zero
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setDefaults()
+        logic()
+        originalBottomViewRec = self.bottomView.frame
+        totalAmount.becomeFirstResponder()
+        amountChanged(NSNull.self)
+    }
+    
+    
+    
+    @IBAction func amountChanged(_ sender: Any) {
+        if (totalAmount.text?.isEmpty)! {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.bottomView.isHidden = true
+            })
+            
+        } else {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.bottomView.isHidden = false
+            })
+            
+            
+        }
+    }
+    
+    func applicationDidEnterBackground() {
+        let lastTotal = self.totalAmount.text
+        let lastTimestamp = NSDate()
+        let date = Date()
+        let calendar = Calendar.current
+        
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        
+        
+        
+        let defaults = UserDefaults.standard
+        
+        LastInstance.instance.set(for: self, lastTotalKey: lastTotal!, lastTimestamp: lastTimestamp)
+        defaults.synchronize()
+    }
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        lastRun = UserDefaults.standard
-        let total = lastRun.string(forKey: totalAmount.text!)
-        
-        
         
         let tapRecognizer = UITapGestureRecognizer() //For user's tap interaction
         tapRecognizer.addTarget(self, action: #selector(TipViewController.tappedOutside)) //Adds a target (ViewController) and an action (tappedOutside) to a gesture-recognizer object.
         self.view.addGestureRecognizer(tapRecognizer) //add the Gesture recognizer to the UIView
-        
-        let fetchRequest: NSFetchRequest<LastRun> = LastRun.fetchRequest()
-        
-        do {
-            let settings =  try PersistanceService.context.fetch(fetchRequest)
-            self.lastRunInfo = settings
-            if !lastRunInfo.isEmpty {
-                totalAmount.text = lastRunInfo[0].billAmount!
-            }
-
-        } catch { print("Error")}
+    }
     
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        setSegmentIndex()
-        logic()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        let lastRun = LastRun(context: PersistanceService.context)
-        lastRun.billAmount = totalAmount.text
-        PersistanceService.saveContext()
-        self.lastRunInfo[0] = lastRun
-        print(lastRun)
-        print(self.lastRunInfo[0])
-    }
     
     func logic() {
         let tipPercent = [0.10,0.15,0.20,0.25] //tip percentages matching segmented control index
         let bill = Double(totalAmount.text!) ?? 0 //gets the user input for bill amount (if no user input then automatically == 0
         let tip = bill * tipPercent[tipAmount.selectedSegmentIndex] //assign the user selected tip value via segment control object
         let total = bill + tip
-    
+        onePerson.text = String(format: "$%.02f", total)
+        twoPeople.text = String(format: "$%.02f", (total/2))
+        threePeople.text = String(format: "$%.02f", (total/3))
+        
         tipLabel.text = String(format: "$%.02f", tip)
         totalLabel.text = String(format: "$%.02f", total)
     }
     
-    func setSegmentIndex() {
+    func setDefaults() {
         let defaults = UserDefaults.standard
         let tipIndex = defaults.integer(forKey: "tipIndex")
-        switch tipIndex {
-            case 0:
-                print("0")
-                tipAmount.selectedSegmentIndex = 0
-            case 1:
-                print("1")
-                tipAmount.selectedSegmentIndex = 1
-            case 2:
-                print("2")
-                tipAmount.selectedSegmentIndex = 2
-            case 3:
-                print("3")
-                tipAmount.selectedSegmentIndex = 3
-            default:
-                break
+        let theme = defaults.integer(forKey: "themeIndex")
+        DefaultTip.instance.set(for: self, tip: tipIndex)
+        tipAmount.selectedSegmentIndex = tipIndex
+        ColorScheme.instance.set(for: self, theme: theme)
+        
+        if theme != 0 {
+            bottomView.backgroundColor = UIColor.lightGray
+        } else {
+            bottomView.backgroundColor = UIColor.white
         }
+        
     }
     
     func tappedOutside(){
         self.view.endEditing(true)
+        //bottomView.isHidden = true
     }
 }
 

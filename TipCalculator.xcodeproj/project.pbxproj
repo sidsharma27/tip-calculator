@@ -11,6 +11,10 @@
 		1F97C3071F2DA539006E5933 /* TipCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3051F2DA539006E5933 /* TipCalculator.xcdatamodeld */; };
 		1F97C30A1F2DA59F006E5933 /* LastRun+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */; };
 		1F97C30B1F2DA59F006E5933 /* LastRun+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */; };
+		1F9AE6771F4D4D1800E494E5 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9AE6731F4D4D1800E494E5 /* ColorScheme.swift */; };
+		1F9AE6781F4D4D1800E494E5 /* DefaultTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9AE6741F4D4D1800E494E5 /* DefaultTip.swift */; };
+		1F9AE6791F4D4D1800E494E5 /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F9AE6751F4D4D1800E494E5 /* Icon-App-60x60@3x.png */; };
+		1F9AE67A1F4D4D1800E494E5 /* LastInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9AE6761F4D4D1800E494E5 /* LastInstance.swift */; };
 		1FD672061EFD8DEA000E80EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD672051EFD8DEA000E80EF /* AppDelegate.swift */; };
 		1FD672081EFD8DEA000E80EF /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD672071EFD8DEA000E80EF /* TipViewController.swift */; };
 		1FD6720B1EFD8DEA000E80EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD672091EFD8DEA000E80EF /* Main.storyboard */; };
@@ -24,6 +28,10 @@
 		1F97C3061F2DA539006E5933 /* TipCalculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TipCalculator.xcdatamodel; sourceTree = "<group>"; };
 		1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastRun+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastRun+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F9AE6731F4D4D1800E494E5 /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
+		1F9AE6741F4D4D1800E494E5 /* DefaultTip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTip.swift; sourceTree = "<group>"; };
+		1F9AE6751F4D4D1800E494E5 /* Icon-App-60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-60x60@3x.png"; sourceTree = "<group>"; };
+		1F9AE6761F4D4D1800E494E5 /* LastInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastInstance.swift; sourceTree = "<group>"; };
 		1FD672021EFD8DEA000E80EF /* TipCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD672051EFD8DEA000E80EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD672071EFD8DEA000E80EF /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +72,10 @@
 		1FD672041EFD8DEA000E80EF /* TipCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				1F9AE6731F4D4D1800E494E5 /* ColorScheme.swift */,
+				1F9AE6741F4D4D1800E494E5 /* DefaultTip.swift */,
+				1F9AE6751F4D4D1800E494E5 /* Icon-App-60x60@3x.png */,
+				1F9AE6761F4D4D1800E494E5 /* LastInstance.swift */,
 				1F97C3081F2DA59F006E5933 /* LastRun+CoreDataClass.swift */,
 				1F97C3091F2DA59F006E5933 /* LastRun+CoreDataProperties.swift */,
 				1FD672051EFD8DEA000E80EF /* AppDelegate.swift */,
@@ -141,6 +153,7 @@
 				1FD672101EFD8DEA000E80EF /* LaunchScreen.storyboard in Resources */,
 				1FD6720D1EFD8DEA000E80EF /* Assets.xcassets in Resources */,
 				1FD6720B1EFD8DEA000E80EF /* Main.storyboard in Resources */,
+				1F9AE6791F4D4D1800E494E5 /* Icon-App-60x60@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,13 +164,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9AE6771F4D4D1800E494E5 /* ColorScheme.swift in Sources */,
 				1FD672081EFD8DEA000E80EF /* TipViewController.swift in Sources */,
+				1F9AE67A1F4D4D1800E494E5 /* LastInstance.swift in Sources */,
 				1F97C3041F2DA491006E5933 /* PersistanceService.swift in Sources */,
 				1FD672061EFD8DEA000E80EF /* AppDelegate.swift in Sources */,
 				1F97C3071F2DA539006E5933 /* TipCalculator.xcdatamodeld in Sources */,
 				1FD672181EFF5A6C000E80EF /* SettingsViewController.swift in Sources */,
 				1F97C30A1F2DA59F006E5933 /* LastRun+CoreDataClass.swift in Sources */,
 				1F97C30B1F2DA59F006E5933 /* LastRun+CoreDataProperties.swift in Sources */,
+				1F9AE6781F4D4D1800E494E5 /* DefaultTip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
