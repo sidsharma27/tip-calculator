@@ -37,7 +37,7 @@ I *really* like the iOS platform. I've been exposed to Swift before and it's a r
 
 Question 2: "Swift uses [Automatic Reference Counting](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID49) (ARC), which is not a garbage collector, to manage memory. Can you explain how you can get a strong reference cycle for closures? (There's a section explaining this concept in the link, how would you summarize as simply as possible?)"
 
-Classes & closures are both reference types in Swift. That's why if you assign a closure to a property of the class instance and the body of the closure captures the instance (by accessing a property of the instance class self). In this case, the instance class and closure are keeping each other alive which creates a strong reference cycle. 
+Classes & closures are both reference types in Swift. That's why if you assign a closure to a property of the class instance and the body of the closure captures the instance (by accessing a property of the instance class self), it will create a strong reference cycle because the instance class and closure are keeping each other alive.
 
 ## License
 
