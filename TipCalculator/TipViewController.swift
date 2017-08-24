@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TipViewController: UIViewController   {
     
@@ -18,7 +19,12 @@ class TipViewController: UIViewController   {
     @IBOutlet weak var twoPeople: UILabel!
     @IBOutlet weak var threePeople: UILabel!
     
-    
+    var billAmount:LastRun?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    var openingTime:NSDate!
+    var closingTime:NSDate!
+
     @IBAction func tip(_ sender: Any) {
         logic()
     }
@@ -37,9 +43,9 @@ class TipViewController: UIViewController   {
         originalBottomViewRec = self.bottomView.frame
         totalAmount.becomeFirstResponder()
         amountChanged(NSNull.self)
+        getData()
+
     }
-    
-    
     
     @IBAction func amountChanged(_ sender: Any) {
         if (totalAmount.text?.isEmpty)! {
@@ -56,22 +62,36 @@ class TipViewController: UIViewController   {
         }
     }
     
-    func applicationDidEnterBackground() {
-        let lastTotal = self.totalAmount.text
-        let lastTimestamp = NSDate()
-        let date = Date()
-        let calendar = Calendar.current
-        
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        
-        
-        
-        let defaults = UserDefaults.standard
-        
-        LastInstance.instance.set(for: self, lastTotalKey: lastTotal!, lastTimestamp: lastTimestamp)
-        defaults.synchronize()
+    func getData() {
+        do {
+            billAmount = try context.fetch(LastRun.fetchRequest()).last
+            print(billAmount)
+            if billAmount?.billAmount != nil {
+                print("last bill: " + (billAmount?.billAmount!)!)
+                if billAmount?.billAmount?.trimmingCharacters(in: .whitespaces) != "" {
+                    totalAmount.text = billAmount?.billAmount
+                    bottomView.isHidden = false
+                    logic()
+                }
+            }
+        } catch {
+            print("Fetching Failed")
+        }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        let lastRun = LastRun(context: context)
+        lastRun.billAmount = totalAmount.text!
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        // Save (coredata)
+    }
+    
+    func reset() {
+        totalAmount.text = ""
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

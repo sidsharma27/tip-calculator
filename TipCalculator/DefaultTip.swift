@@ -13,7 +13,6 @@ class DefaultTip {
     let defaults = UserDefaults.standard
     
     func set(for viewController: UIViewController, tip: Int) {
-        
         if (tip == 0) {
             defaults.set(0, forKey: "tipIndex")
             defaults.synchronize()

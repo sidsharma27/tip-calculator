@@ -11,5 +11,5 @@ import CoreData
 
 @objc(LastRun)
 public class LastRun: NSManagedObject {
-
+//    @NSManaged var billAmount: String
 }
