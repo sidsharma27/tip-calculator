@@ -39,7 +39,6 @@ class TipViewController: UIViewController   {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setDefaults()
-        logic()
         originalBottomViewRec = self.bottomView.frame
         totalAmount.becomeFirstResponder()
         amountChanged(NSNull.self)
@@ -49,17 +48,25 @@ class TipViewController: UIViewController   {
     
     @IBAction func amountChanged(_ sender: Any) {
         if (totalAmount.text?.isEmpty)! {
-            UIView.animate(withDuration: 0.4, animations: {
-                self.bottomView.isHidden = true
-            })
-            
-        } else {
-            UIView.animate(withDuration: 0.4, animations: {
-                self.bottomView.isHidden = false
-            })
-            
-            
+            hideView()
         }
+        else {
+            showView()
+        }
+    }
+    
+    func showView() {
+        UIView.animate(withDuration: 0.4, animations: {
+            //self.bottomView.isHidden = false
+            self.bottomView.alpha = 1
+        })
+    }
+    
+    func hideView() {
+        UIView.animate(withDuration: 0.4, animations: {
+            //self.bottomView.isHidden = true
+            self.bottomView.alpha = 0
+        })
     }
     
     func getData() {
@@ -72,6 +79,7 @@ class TipViewController: UIViewController   {
                     totalAmount.text = billAmount?.billAmount
                     bottomView.isHidden = false
                     logic()
+                    showView()
                 }
             }
         } catch {
@@ -91,7 +99,6 @@ class TipViewController: UIViewController   {
     func reset() {
         totalAmount.text = ""
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
