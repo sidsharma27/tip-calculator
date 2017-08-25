@@ -18,13 +18,15 @@ class TipViewController: UIViewController   {
     @IBOutlet weak var onePerson: UILabel!
     @IBOutlet weak var twoPeople: UILabel!
     @IBOutlet weak var threePeople: UILabel!
+    @IBOutlet weak var currencySymbol: UILabel!
     
     var billAmount:LastRun?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     var openingTime:NSDate!
     var closingTime:NSDate!
-
+    let formatter = NumberFormatter()
+    
     @IBAction func tip(_ sender: Any) {
         logic()
     }
@@ -58,6 +60,7 @@ class TipViewController: UIViewController   {
     func showView() {
         UIView.animate(withDuration: 0.4, animations: {
             //self.bottomView.isHidden = false
+            self.bottomView.isHidden = false
             self.bottomView.alpha = 1
         })
     }
@@ -81,6 +84,9 @@ class TipViewController: UIViewController   {
                     logic()
                     showView()
                 }
+            }
+            else {
+                bottomView.isHidden = true
             }
         } catch {
             print("Fetching Failed")
@@ -114,19 +120,37 @@ class TipViewController: UIViewController   {
         let bill = Double(totalAmount.text!) ?? 0 //gets the user input for bill amount (if no user input then automatically == 0
         let tip = bill * tipPercent[tipAmount.selectedSegmentIndex] //assign the user selected tip value via segment control object
         let total = bill + tip
+        
+        
+     
+        formatter.numberStyle = .currency
+        // formatter.locale = NSLocale.currentLocale() // This is the default
+        // In Swift 4, this ^ has been renamed to simply NSLocale.current
+        
+        tipLabel.text = formatter.string(from: NSNumber(value: tip)) // "$123.44"
+        totalLabel.text = formatter.string(from: NSNumber(value: total))
+        onePerson.text = formatter.string(from: NSNumber(value: total))
+        twoPeople.text = formatter.string(from: NSNumber(value: (total/2)))
+        threePeople.text = formatter.string(from: NSNumber(value: (total/3)))
+
+        
+        /*
         onePerson.text = String(format: "$%.02f", total)
         twoPeople.text = String(format: "$%.02f", (total/2))
         threePeople.text = String(format: "$%.02f", (total/3))
         
         tipLabel.text = String(format: "$%.02f", tip)
         totalLabel.text = String(format: "$%.02f", total)
+        */
     }
     
     func setDefaults() {
         let defaults = UserDefaults.standard
         let tipIndex = defaults.integer(forKey: "tipIndex")
         let theme = defaults.integer(forKey: "themeIndex")
+        var currencyIndex = defaults.integer(forKey: "currencyIndex")
         DefaultTip.instance.set(for: self, tip: tipIndex)
+        DefaultCurrency.instance.set(for: self, currency: currencyIndex)
         tipAmount.selectedSegmentIndex = tipIndex
         ColorScheme.instance.set(for: self, theme: theme)
         
@@ -136,7 +160,24 @@ class TipViewController: UIViewController   {
             bottomView.backgroundColor = UIColor.white
         }
         
+        print(currencyIndex)
+        
+        if currencyIndex == 0 {
+            formatter.locale = Locale(identifier: "en_US")
+            currencySymbol.text = "$"
+        } else if currencyIndex == 1 {
+            formatter.locale = Locale(identifier: "en_GB")
+            currencySymbol.text = "£"
+        } else if currencyIndex == 2 {
+            formatter.locale = Locale(identifier: "fr_FR")
+            currencySymbol.text = "€"
+        } else {
+            formatter.locale = Locale(identifier: "hi_IN")
+            currencySymbol.text = "₹"
+            formatter.string(for: totalAmount)
+        }
     }
+    
     
     func tappedOutside(){
         self.view.endEditing(true)
